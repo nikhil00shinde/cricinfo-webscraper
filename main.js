@@ -1,10 +1,9 @@
-import cheerio from "cheerio";
-import request from "request";
+const request = require("request");
+const cheerio = require("cheerio");
+const AllMatchObj = require("./Allmatch");
 
 const url = "https://www.espncricinfo.com/series/ipl-2020-21-1210595";
 // Venue Date Opponent result runs balls fours sixes strikerate
-
-import { getAllMatchesLink } from "./Allmatch.js";
 
 //home page
 request(url, cb);
@@ -22,5 +21,5 @@ function extractLink(html) {
 	let anchorElem = $('a[data-hover="View All Results"]');
 	let link = anchorElem.attr("href");
 	let fullLink = "https://www.espncricinfo.com/" + link;
-	getAllMatchesLink(fullLink);
+	AllMatchObj.getAllMatchesLink(fullLink);
 }

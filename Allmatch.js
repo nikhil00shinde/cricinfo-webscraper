@@ -1,6 +1,7 @@
-import { processScorecard } from "./scorecard.js";
-import cheerio from "cheerio";
-import request from "request";
+const request = require("request");
+const cheerio = require("cheerio");
+const scoreCardObj = require("./scorecard");
+
 function getAllMatchesLink(url) {
 	request(url, function (err, response, html) {
 		if (err) {
@@ -8,7 +9,7 @@ function getAllMatchesLink(url) {
 		} else {
 			extractAllLinks(html);
 		}
-});
+	});
 }
 
 function extractAllLinks(html) {
@@ -21,7 +22,9 @@ function extractAllLinks(html) {
 
 		let fullLink = "https://www.espncricinfo.com/" + link;
 		console.log(fullLink);
-		processScorecard(fullLink);
+		scoreCardObj.ps(fullLink);
 	}
 }
-export { getAllMatchesLink };
+module.exports = {
+	getAllMatchesLink,
+};
